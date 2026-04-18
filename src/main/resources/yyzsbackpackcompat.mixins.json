@@ -1,0 +1,47 @@
+{
+  "required": true,
+  "package": "de.mwojt.yyzsbackpackcompat.mixin",
+  "plugin": "de.mwojt.yyzsbackpackcompat.mixin.CompatMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "compat.aether.AetherFurnaceMenuMixin",
+    "compat.aether.AetherIncubatorMenuMixin",
+    "compat.aether.AetherLoreBookMenuMixin",
+    "compat.farmersdelight.CookingPotMenuMixin",
+    "compat.sawmill.SawmillMenuMixin",
+    "compat.betterarcheology.FossilInventoryMenuMixin",
+    "compat.betterarcheology.IdentifyingMenuMixin",
+    "compat.chisel.ChiselScreenHandlerMixin",
+    "compat.better_beacons.NewBeaconMenuMixin",
+    "compat.deep_aether.DeepAetherCombinerMenuMixin",
+    "compat.storagedrawers.ContainerDrawersMixin",
+    "compat.create.CreateMenuBaseMixin",
+    "compat.corpse.CorpseContainerBaseMixin",
+    "compat.securitycraft.InventoryScannerMenuMixin",
+    "compat.securitycraft.BriefcaseMenuMixin",
+    "compat.spectrum.SpectrumPedestalMixin",
+    "compat.spectrum.SpectrumCraftingTabletMixin",
+    "compat.spectrum.SpectrumFabricationChestMixin",
+    "compat.spectrum.SpectrumCompactingChestMixin",
+    "compat.spectrum.SpectrumBlackHoleChestMixin",
+    "compat.spectrum.SpectrumPotionWorkshopMixin",
+    "compat.spectrum.SpectrumColorPickerMixin",
+    "compat.spectrum.SpectrumCinderhearthMixin",
+    "compat.spectrum.SpectrumFilteringMixin",
+    "compat.spectrum.Spectrum3x3ContainerMixin",
+    "compat.spectrum.SpectrumParticleSpawnerMixin",
+    "compat.exposure.LightroomMenuMixin",
+    "compat.accessories.AccessoriesMenuMixin",
+    "compat.accessories.AccessoriesExperimentalMenuMixin"
+  ],
+  "client": [
+    "compat.accessories.AccessoriesScreenOffsetMixin",
+    "compat.accessories.AccessoriesExperimentalScreenOffsetMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
