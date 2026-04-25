@@ -32,7 +32,8 @@
     "compat.spectrum.SpectrumParticleSpawnerMixin",
     "compat.exposure.LightroomMenuMixin",
     "compat.accessories.AccessoriesMenuMixin",
-    "compat.accessories.AccessoriesExperimentalMenuMixin"
+    "compat.accessories.AccessoriesExperimentalMenuMixin",
+    "compat.statuemenus.ArmorStandMenuMixin"
   ],
   "client": [
     "compat.accessories.AccessoriesScreenOffsetMixin",

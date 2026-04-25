@@ -19,6 +19,7 @@ Each integration only activates if the matching mod is present, so any combinati
 | [The Aether](https://modrinth.com/mod/the-aether) | Altar, Freezer, Incubator, Book of Lore |
 | [Deep Aether](https://modrinth.com/mod/deep-aether) | Combiner |
 | [Accessories](https://modrinth.com/mod/accessories) | Original + Experimental screens (with dynamic sizing) |
+| [Armor Statues](https://modrinth.com/mod/armor-statues) | Equipment screen (only screen with player inventory) |
 | [Better Archeology](https://modrinth.com/mod/better-archeology) | Fossil Inventory, Identifying |
 | [CERBON's Better Beacons](https://modrinth.com/mod/cerbons-better-beacons) | New Beacon Menu |
 | [Chisel Reborn](https://modrinth.com/mod/chisel-reborn) | Chisel |

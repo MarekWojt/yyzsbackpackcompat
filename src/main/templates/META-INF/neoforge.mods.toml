@@ -192,3 +192,10 @@ config="${mod_id}.mixins.json"
     versionRange = "[1.1.0-beta.53,)"
     ordering = "AFTER"
     side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+    modId = "statuemenus"
+    type = "optional"
+    versionRange = "[21.1.0,)"
+    ordering = "AFTER"
+    side = "BOTH"
