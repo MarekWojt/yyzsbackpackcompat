@@ -91,7 +91,7 @@ config="${mod_id}.mixins.json"
 [[dependencies."${mod_id}"]]
     modId = "yyzsbackpack"
     type = "required"
-    versionRange = "[21.1.2,)"
+    versionRange = "[21.1.13,)"
     ordering = "AFTER"
     side = "BOTH"
 
