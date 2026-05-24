@@ -1,5 +1,6 @@
 package de.mwojt.yyzsbackpackcompat.mixin.compat.spectrum;
 
+import de.mwojt.yyzsbackpackcompat.util.BackpackCompatMenu;
 import de.mwojt.yyzsbackpackcompat.util.BackpackSlotInjector;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "de.dafuqs.spectrum.inventories.PotionWorkshopScreenHandler")
-public abstract class SpectrumPotionWorkshopMixin extends AbstractContainerMenu {
+public abstract class SpectrumPotionWorkshopMixin extends AbstractContainerMenu implements BackpackCompatMenu {
     protected SpectrumPotionWorkshopMixin(@Nullable MenuType<?> menuType, int i) {
         super(menuType, i);
     }

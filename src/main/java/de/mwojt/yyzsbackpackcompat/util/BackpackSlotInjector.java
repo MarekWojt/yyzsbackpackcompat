@@ -12,7 +12,8 @@ public final class BackpackSlotInjector {
 
     /**
      * Adds backpack slots to a menu by finding the player Inventory from already-added slots.
-     * Safe to call at the end of any menu constructor that adds player inventory slots.
+     * Safe to call at the end of any menu constructor that adds player inventory slots, and again
+     * later (e.g. from the server sync hook) — it is idempotent.
      */
     public static void inject(AbstractContainerMenu menu) {
         // Don't add twice

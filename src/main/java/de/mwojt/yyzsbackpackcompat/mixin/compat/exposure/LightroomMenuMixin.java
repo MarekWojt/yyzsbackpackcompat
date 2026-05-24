@@ -1,6 +1,7 @@
 package de.mwojt.yyzsbackpackcompat.mixin.compat.exposure;
 
 import com.yyz.yyzsbackpack.base.BackpackMenu;
+import de.mwojt.yyzsbackpackcompat.util.BackpackCompatMenu;
 import de.mwojt.yyzsbackpackcompat.util.BackpackSlotInjector;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "io.github.mortuusars.exposure.world.inventory.LightroomMenu")
-public abstract class LightroomMenuMixin extends AbstractContainerMenu {
+public abstract class LightroomMenuMixin extends AbstractContainerMenu implements BackpackCompatMenu {
     protected LightroomMenuMixin(@Nullable MenuType<?> menuType, int i) {
         super(menuType, i);
     }

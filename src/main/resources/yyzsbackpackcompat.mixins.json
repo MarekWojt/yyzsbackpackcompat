@@ -4,6 +4,7 @@
   "plugin": "de.mwojt.yyzsbackpackcompat.mixin.CompatMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractContainerMenuSyncMixin",
     "compat.aether.AetherFurnaceMenuMixin",
     "compat.aether.AetherIncubatorMenuMixin",
     "compat.aether.AetherLoreBookMenuMixin",

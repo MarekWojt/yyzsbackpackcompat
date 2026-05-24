@@ -25,13 +25,22 @@ The base yyzsbackpack mod uses two key mixins on abstract classes:
 
 However, **backpack inventory slots must be added per-menu** via constructor injection calling `SlotManager.addBackpackInventorySlots(menu, inventory)`. The base mod only does this for vanilla menus. This compat mod adds the same injection for modded menus.
 
+### Client/server slot symmetry (critical)
+
+yyzsbackpack 21.1.13 reworked container content sync: it removed the old `NonNullListMixin` (which tolerated index overruns) and added a `@Redirect` in its `AbstractContainerMenuMixin` that makes `AbstractContainerMenu.initializeContents` iterate the **client** menu's `slots.size()` instead of the server-sent `items.size()`. As a result, **any** menu whose client slot count exceeds the server's crashes the client with `IndexOutOfBoundsException` when the content packet arrives.
+
+The constructor `@Inject(<init>, RETURN)` is **not reliable on the server**: for menus whose client constructor delegates via `this(...)` to a separate server constructor (common for Fabric-style `ScreenHandler`s, e.g. Spectrum), the injection effectively only binds the client constructor, so the server menu never gets backpack slots → client (with slots) > server (without) → crash.
+
+To guarantee symmetry, every backpack-adding menu mixin **must implement the `BackpackCompatMenu` marker interface**. `AbstractContainerMenuSyncMixin` injects into `AbstractContainerMenu.sendAllDataToRemote()` (the server's initial full sync, run before the content packet) and calls `BackpackSlotInjector.inject(this)` for any `BackpackCompatMenu`, so the server always has the same slots as the client. Injection is idempotent, so this is harmless for menus whose constructor injection already added them.
+
 ### Adding support for a new menu
 
 1. Find the menu class (extends `AbstractContainerMenu`) and verify it adds player inventory slots
 2. Create a mixin in `mixin/compat/<modid>/` using `@Mixin(targets = "fully.qualified.ClassName")`
-3. Inject into `<init>` at `RETURN`, call `BackpackSlotInjector.inject(this)`
-4. Register the mixin in `yyzsbackpackcompat.mixins.json` as `compat.<modid>.MixinName`
-5. Add the mod as optional dependency in `neoforge.mods.toml` (with `versionRange`)
+3. Make the mixin `implements BackpackCompatMenu` (the server-sync marker — required, see above)
+4. Inject into `<init>` at `RETURN`, call `BackpackSlotInjector.inject(this)` (handles the client)
+5. Register the mixin in `yyzsbackpackcompat.mixins.json` as `compat.<modid>.MixinName`
+6. Add the mod as optional dependency in `neoforge.mods.toml` (with `versionRange`)
 
 No manual plugin mapping is needed — `CompatMixinPlugin` auto-extracts the mod ID from the mixin's package name (first segment after `mixin.compat.`).
 
@@ -52,8 +61,10 @@ For static offsets (fixed side elements like Exposure Lightroom's lip, or unusua
 
 ### Key files
 
-- `util/BackpackSlotInjector.java` — safe slot injection helper (finds Inventory from existing slots). Lives outside the `mixin` package because Mixin does not allow non-mixin classes in a package it owns.
-- `mixin/CompatMixinPlugin.java` — conditionally applies mixins based on loaded mods (auto-derives mod ID from package name)
+- `util/BackpackSlotInjector.java` — safe (idempotent) slot injection helper (finds Inventory from existing slots). Lives outside the `mixin` package because Mixin does not allow non-mixin classes in a package it owns.
+- `util/BackpackCompatMenu.java` — marker interface implemented by every backpack-adding menu mixin; drives the server-side sync hook (see "Client/server slot symmetry")
+- `mixin/AbstractContainerMenuSyncMixin.java` — server-side safety net; adds backpack slots to `BackpackCompatMenu` menus in `sendAllDataToRemote()` before the initial content sync
+- `mixin/CompatMixinPlugin.java` — conditionally applies mixins based on loaded mods (auto-derives mod ID from package name); always applies non-`compat.<modid>` mixins like `AbstractContainerMenuSyncMixin`
 - `mixin/compat/<modid>/*.java` — one subfolder per mod, one mixin per modded menu target
 - `yyzsbackpackcompat.mixins.json` — mixin registration with plugin reference; server mixins under `mixins`, client-only screen mixins under `client`
 

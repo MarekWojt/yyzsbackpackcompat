@@ -1,5 +1,6 @@
 package de.mwojt.yyzsbackpackcompat.mixin.compat.aether;
 
+import de.mwojt.yyzsbackpackcompat.util.BackpackCompatMenu;
 import de.mwojt.yyzsbackpackcompat.util.BackpackSlotInjector;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "com.aetherteam.aether.inventory.menu.IncubatorMenu")
-public abstract class AetherIncubatorMenuMixin extends AbstractContainerMenu {
+public abstract class AetherIncubatorMenuMixin extends AbstractContainerMenu implements BackpackCompatMenu {
     protected AetherIncubatorMenuMixin(@Nullable MenuType<?> menuType, int i) {
         super(menuType, i);
     }

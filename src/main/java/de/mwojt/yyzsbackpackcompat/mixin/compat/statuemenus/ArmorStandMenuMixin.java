@@ -1,6 +1,7 @@
 package de.mwojt.yyzsbackpackcompat.mixin.compat.statuemenus;
 
 import com.yyz.yyzsbackpack.base.BackpackMenu;
+import de.mwojt.yyzsbackpackcompat.util.BackpackCompatMenu;
 import de.mwojt.yyzsbackpackcompat.util.BackpackSlotInjector;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "fuzs.statuemenus.api.v1.world.inventory.ArmorStandMenu")
-public abstract class ArmorStandMenuMixin extends AbstractContainerMenu {
+public abstract class ArmorStandMenuMixin extends AbstractContainerMenu implements BackpackCompatMenu {
     protected ArmorStandMenuMixin(@Nullable MenuType<?> menuType, int i) {
         super(menuType, i);
     }
